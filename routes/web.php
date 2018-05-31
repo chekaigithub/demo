@@ -16,3 +16,5 @@ Route::get('/help','IndexController@help')->name('help');
 Route::get('/about','IndexController@about')->name('about');
 
 Route::get('signup','UsersController@create')->name('signup');
+
+Route::resource('users','UsersController');
