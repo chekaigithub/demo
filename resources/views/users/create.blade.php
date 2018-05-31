@@ -9,16 +9,24 @@
     </div>
     <div class="panel-body">
     	@include('shared._errors')
-      <form method="POST" action="{{ route('users.store') }}">
-      	 {{ csrf_field() }}
+      
           <div class="form-group">
+            @if ($user)
+              <form method="POST" action="{{ route('users.update', $user->id )}}">
+                {{ method_field('PATCH') }}
+            @else
+             <form method="POST" action="{{ route('users.store') }}">
+              
+              
+            @endif
+                 {{ csrf_field() }}
             <label for="name">名称：</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+            <input type="text" name="name" class="form-control" value="@if ($user) {{ $user->name }} @else {{ old('name') }} @endif">
           </div>
 
           <div class="form-group">
             <label for="email">邮箱：</label>
-            <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+            <input type="text" name="email" class="form-control" value="@if ($user) {{ $user->email }} @else {{ old('email') }} @endif">
           </div>
 
           <div class="form-group">
